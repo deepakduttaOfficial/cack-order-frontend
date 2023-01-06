@@ -1,0 +1,4 @@
+const PRODUCT_ACTION = {
+  GET_APP_PRODUCTS: "GET_APP_PRODUCTS",
+};
+export default PRODUCT_ACTION;
