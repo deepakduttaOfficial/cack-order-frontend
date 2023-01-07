@@ -4,32 +4,31 @@ import {
   Image,
   Badge,
   useColorModeValue,
-  Icon,
-  chakra,
-  Tooltip,
   LinkBox,
   LinkOverlay,
-  Circle,
   Text,
 } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
 import CustomButton from "./CustomButton";
-import { NavLink } from "react-router-dom";
-const data = {
-  isNew: true,
-  imageURL:
-    "https://images.unsplash.com/photo-1521398359471-8997fbaa9406?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fja2VzfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-  name: "Wayfarer Classic this is a awosome card",
-  price: 4.5,
-};
+import { NavLink, useNavigate } from "react-router-dom";
+import { addcard } from "../helper/addCard";
+import { useDispatch } from "react-redux";
+import { updateAddCard } from "../reducer/UI/action";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleClik = (product) => {
+    addcard(product);
+    dispatch(updateAddCard());
+    navigate("/addcard");
+  };
   return (
     <LinkBox role={"group"}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
-        w={"full"}
+        // w={"full"}
+        maxW={"sm"}
         borderWidth="1px"
         rounded="lg"
         shadow="lg"
@@ -44,8 +43,9 @@ const ProductCard = ({ product }) => {
         >
           <Image
             src={product?.photos[0]?.secure_url}
-            alt={`Picture of ${data.name}`}
+            alt={`Picture of ${product?.photos[0]?.public_id}`}
             w={"full"}
+            fit="cover"
             transition="all 0.5s ease-in-out"
             _groupHover={{ transform: "scale(1.2)" }}
           />
@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
               New
             </Badge>
           </Box>
-          <LinkOverlay as={NavLink} to={`/e/signin/${product?._id}`}>
+          <LinkOverlay as={NavLink} to={`/addcard/${product?._id}`}>
             <Flex mt="1" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="2xl"
@@ -79,7 +79,15 @@ const ProductCard = ({ product }) => {
               {product?.price.toFixed(2)}
             </Box>
           </Flex>
-          <CustomButton w={"full"} mt={3} display="flex" alignItems="center">
+          <CustomButton
+            w={"full"}
+            mt={3}
+            display="flex"
+            alignItems="center"
+            onClick={() => {
+              handleClik(product);
+            }}
+          >
             <Text mr={"2"}>Add to card</Text> <FiShoppingCart />
           </CustomButton>
         </Box>

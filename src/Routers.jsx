@@ -6,6 +6,7 @@ import Signin from "./pages/signin";
 import Signup from "./pages/signup";
 import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import RecoveryPassword from "./pages/forgotpassword/RecoveryPassword";
+import Addcardproducts from "./pages/addcardproducts";
 
 const Routers = () => {
   tokenAuth();
@@ -17,6 +18,7 @@ const Routers = () => {
       <Route path="*" element={<PageNotFound />} />
       <Route path="/account/forgotpassword" element={<ForgotPassword />} />
       <Route path="/account/reset-password" element={<RecoveryPassword />} />
+      <Route path="/addcard" element={<Addcardproducts />} />
     </Routes>
   );
 };

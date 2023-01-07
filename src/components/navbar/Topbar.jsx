@@ -18,6 +18,7 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
+  Badge,
 } from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -26,6 +27,9 @@ import { BiSearch } from "react-icons/bi";
 import { BsSun, BsMoonStarsFill } from "react-icons/bs";
 import CustomButton from "../CustomButton";
 import { getLocalUser, isAuthenticate, signout } from "../../helper/auth";
+
+import { FiShoppingCart } from "react-icons/fi";
+import { getaddcard } from "../../helper/addCard";
 
 const Topbar = ({ isOpen, onOpen, onClose }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -64,6 +68,26 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
             >
               {colorMode === "light" ? <BsMoonStarsFill /> : <BsSun />}
             </Button>
+
+            <Box
+              mr="2"
+              as={NavLink}
+              to="/addcard"
+              position={"relative"}
+              rounded="full"
+              p={"1"}
+            >
+              <FiShoppingCart size="26px" name="bell" />
+              <Badge
+                position={"absolute"}
+                top="-1"
+                right="-1"
+                bgColor={"red.400"}
+                rounded="full"
+              >
+                {getaddcard().length}
+              </Badge>
+            </Box>
 
             {isAuthenticate() ? (
               <Flex alignItems={"center"}>
