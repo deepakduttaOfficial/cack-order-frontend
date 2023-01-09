@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Box,
+  Button,
   Flex,
   Heading,
   HStack,
@@ -14,6 +15,8 @@ import { useEffect } from "react";
 import { getaddcard } from "../../helper/addCard";
 import CartItem from "./CartItem";
 import CartOrderSummary from "./CartOrderSummary";
+
+import { BiArrowBack } from "react-icons/bi";
 
 const Addcardproducts = () => {
   const [products, setproducts] = useState([]);
@@ -60,6 +63,11 @@ const Addcardproducts = () => {
           }}
           flex="2"
         >
+          <Box>
+            <Button as={NavLink} to="/">
+              <BiArrowBack />
+            </Button>
+          </Box>
           <Heading fontSize="2xl" fontWeight="extrabold">
             Shopping Cart ({products.length} items)
           </Heading>

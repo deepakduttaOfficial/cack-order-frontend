@@ -1,0 +1,7 @@
+#image-carousel::-webkit-scrollbar {
+  width: 0px;
+}
+
+.image-gallery-icon {
+  display: none;
+}

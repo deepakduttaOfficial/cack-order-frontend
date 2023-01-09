@@ -68,7 +68,7 @@ const ProductCard = ({ product }) => {
               New
             </Badge>
           </Box>
-          <LinkOverlay as={NavLink} to={`/addcard/${product?._id}`}>
+          <LinkOverlay as={NavLink} to={`/product/${product?._id}`}>
             <Flex mt="1" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="2xl"
