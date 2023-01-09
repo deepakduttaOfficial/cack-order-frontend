@@ -11,7 +11,7 @@ import {
 import { FiShoppingCart } from "react-icons/fi";
 import CustomButton from "./CustomButton";
 import { NavLink, useNavigate } from "react-router-dom";
-import { addcard } from "../helper/addCard";
+import { addcard, getaddcard } from "../helper/addCard";
 import { useDispatch } from "react-redux";
 import { updateAddCard } from "../reducer/UI/action";
 
@@ -19,9 +19,20 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClik = (product) => {
-    addcard(product);
-    dispatch(updateAddCard());
-    navigate("/addcard");
+    const isAdded = getaddcard().some((item) => {
+      if (item._id === product._id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (!isAdded) {
+      addcard(product);
+      dispatch(updateAddCard());
+      navigate("/addcard");
+    } else {
+      navigate("/addcard");
+    }
   };
   return (
     <LinkBox role={"group"}>
