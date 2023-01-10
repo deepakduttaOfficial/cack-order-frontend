@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
     <LinkBox role={"group"}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
-        // w={"full"}
+        w={"full"}
         maxW={"sm"}
         borderWidth="1px"
         rounded="lg"
@@ -56,7 +56,6 @@ const ProductCard = ({ product }) => {
             src={product?.photos[0]?.secure_url}
             alt={`Picture of ${product?.photos[0]?.public_id}`}
             w={"full"}
-            fit="cover"
             transition="all 0.5s ease-in-out"
             _groupHover={{ transform: "scale(1.2)" }}
           />

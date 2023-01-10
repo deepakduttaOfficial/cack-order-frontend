@@ -1,7 +1,9 @@
 import React from "react";
-import { Card, HStack, Image } from "@chakra-ui/react";
+import { Box, Button, Card, HStack, Image } from "@chakra-ui/react";
 import ImageGallery from "react-image-gallery";
 import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { BiArrowBack } from "react-icons/bi";
 
 const CarouselImagesCard = () => {
   const { singleproduct } = useSelector((state) => state.PRODUCT);
@@ -12,17 +14,22 @@ const CarouselImagesCard = () => {
   });
 
   return (
-    <Card w={{ base: "full", md: "md" }}>
-      <ImageGallery
-        infinite={false}
-        showFullscreenButton={true}
-        showPlayButton={true}
-        disableSwipe={true}
-        slideDuration={0}
-        showBullets={true}
-        items={images}
-      />
-    </Card>
+    <Box px={{ base: "0", md: "5" }} w={{ base: "full", md: "lg" }}>
+      <Button mt="5" as={NavLink} to="/">
+        <BiArrowBack />
+      </Button>
+      <Box py={"5"}>
+        <ImageGallery
+          infinite={false}
+          showFullscreenButton={true}
+          showPlayButton={true}
+          disableSwipe={true}
+          slideDuration={0}
+          showBullets={true}
+          items={images}
+        />
+      </Box>
+    </Box>
   );
 };
 

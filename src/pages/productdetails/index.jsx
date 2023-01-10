@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Container, Flex } from "@chakra-ui/react";
+import { Container, Flex, useColorModeValue } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { getsingleproduct } from "./helper";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProdcut } from "../../reducer/product/action";
 import CarouselImagesCard from "./components/CarouselImagesCard";
+import ProdcutDetailsCard from "./components/ProdcutDetailsCard";
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -26,12 +27,18 @@ const ProductDetails = () => {
     });
   }, []);
 
-  // const { singleproduct } = useSelector((state) => state.PRODUCT);
-  // console.log(singleproduct);
   return (
-    <Container maxW={"6xl"} bgColor="gray.700" p="10" my="14">
-      <Flex>
+    <Container
+      maxW={"6xl"}
+      my="14"
+      bgColor={useColorModeValue("gray.100", "gray.700")}
+    >
+      <Flex
+        flexDir={{ base: "column", md: "row" }}
+        justifyContent={{ base: "start", md: "space-between" }}
+      >
         <CarouselImagesCard />
+        <ProdcutDetailsCard />
       </Flex>
     </Container>
   );
