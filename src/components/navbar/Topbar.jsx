@@ -102,7 +102,15 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
                     <Avatar name={user?.name} src={user?.photo?.secure_url} />
                   </MenuButton>
                   <MenuList>
-                    <MenuItem>Link 1</MenuItem>
+                    <MenuItem
+                      color={useColorModeValue("green.600", "green.200")}
+                      as={NavLink}
+                      to={`/admin/${
+                        getLocalUser()?._id
+                      }/dashboard/createproduct`}
+                    >
+                      ADMIN DASHBOARD
+                    </MenuItem>
                     <MenuItem>Link 2</MenuItem>
                     <MenuDivider />
                     <MenuItem

@@ -80,7 +80,7 @@ export default function Signin() {
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
-      {isAuthenticate() && <Navigate to={"/"} />}
+      {isAuthenticate() && <Navigate to={"/"} replace />}
       <Stack spacing={8} mx={"auto"} w="lg" py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>Sign in to your account</Heading>

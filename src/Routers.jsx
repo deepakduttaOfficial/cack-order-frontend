@@ -8,6 +8,8 @@ import ForgotPassword from "./pages/forgotpassword/ForgotPassword";
 import RecoveryPassword from "./pages/forgotpassword/RecoveryPassword";
 import ProductDetails from "./pages/productdetails";
 import Addcardproducts from "./pages/addcardproducts";
+import CreateProduct from "./ADMIN/pages/CreateProduct";
+import AdminRoute from "./helper/AdminRoute";
 
 const Routers = () => {
   tokenAuth();
@@ -21,6 +23,14 @@ const Routers = () => {
       <Route path="/account/reset-password" element={<RecoveryPassword />} />
       <Route path="/product/:productId" element={<ProductDetails />} />
       <Route path="/addcard" element={<Addcardproducts />} />
+      <Route
+        path="/admin/:adminId/dashboard/createproduct"
+        element={
+          <AdminRoute>
+            <CreateProduct />
+          </AdminRoute>
+        }
+      />
     </Routes>
   );
 };

@@ -97,10 +97,11 @@ const ProdcutDetailsCard = () => {
       <HStack
         border={"1px"}
         rounded="md"
-        borderColor={useColorModeValue("g", "gray.600")}
+        borderColor={useColorModeValue("gray.200", "gray.600")}
         w={"44"}
         justifyContent="space-between"
         p={"1"}
+        bg={useColorModeValue("white", "transparent")}
       >
         <Button
           disabled={quan === 1}
