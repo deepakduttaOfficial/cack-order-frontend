@@ -37,7 +37,7 @@ function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   );
 }
 
-const ImagesUpload = ({ images, setImages }) => {
+const ImagesUpload = ({ images, setImages, loading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectFile, setSelectFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
@@ -148,6 +148,7 @@ const ImagesUpload = ({ images, setImages }) => {
               setSelectFile(URL.createObjectURL(e.target.files[0]));
               setIsModal(true);
             }}
+            disabled={loading}
           />
         )}
       </VStack>

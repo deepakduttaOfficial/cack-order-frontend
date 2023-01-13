@@ -7,19 +7,26 @@ import {
   Stack,
   Textarea,
   useColorModeValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import React, { useId } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import CustomButton from "../../components/CustomButton";
+import { isAuthenticate } from "../../helper/auth";
 import { getcategory } from "../../helper/category";
 import ImagesUpload from "../components/ImagesUpload";
 
 import Sidebar from "../components/Sidebar";
-// import UploadImageSlider from "../components/UploadImageSlider";
+import { createproduct } from "./helper/product";
 
 const CreateProduct = () => {
+  const { adminId } = useParams();
+  const token = isAuthenticate();
+  const toast = useToast();
+  const navigate = useNavigate();
   // Get all category
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -40,24 +47,47 @@ const CreateProduct = () => {
     category: "",
     description: "",
     formData: new FormData(),
+    loading: false,
   });
-  const { name, price, stock, category, description, formData } = values;
+  const { name, price, stock, category, description, formData, loading } =
+    values;
 
   useEffect(() => {
     formData.delete("photos");
-    formData.append("photos", images);
+    images.forEach((image) => {
+      formData.append("photos", image);
+    });
   }, [images]);
 
   const handleChange = (name) => (e) => {
     formData.set(name, e.target.value);
-    setValues({ ...values, [name]: e.target.value });
+    setValues({ ...values, [name]: e.target.value, loading: false });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    for (var pair of formData.entries()) {
-      console.log(pair);
-    }
+    setValues({ ...values, loading: true });
+    createproduct(formData, adminId, token).then((response) => {
+      setValues({ ...values, loading: false });
+      if (!response.data) {
+        return toast({
+          position: "top-right",
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top-right",
+          title: "Product created successfully.",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        navigate("/");
+      }
+    });
   };
 
   return (
@@ -73,7 +103,11 @@ const CreateProduct = () => {
       >
         <form onSubmit={handleSubmit}>
           <VStack spacing={5}>
-            <ImagesUpload images={images} setImages={setImages} />
+            <ImagesUpload
+              images={images}
+              setImages={setImages}
+              loading={loading}
+            />
             <HStack w={"full"}>
               <FormControl id={useId()} isRequired>
                 <FormLabel>Product name:</FormLabel>
@@ -82,6 +116,7 @@ const CreateProduct = () => {
                   placeholder="Enter a product name"
                   value={name}
                   onChange={handleChange("name")}
+                  disabled={loading}
                 />
               </FormControl>
 
@@ -92,6 +127,7 @@ const CreateProduct = () => {
                   placeholder="Enter a amount"
                   value={price}
                   onChange={handleChange("price")}
+                  disabled={loading}
                 />
               </FormControl>
             </HStack>
@@ -104,6 +140,7 @@ const CreateProduct = () => {
                   placeholder="Enter your product stock"
                   value={stock}
                   onChange={handleChange("stock")}
+                  disabled={loading}
                 />
               </FormControl>
 
@@ -113,6 +150,7 @@ const CreateProduct = () => {
                   placeholder="Choose a category"
                   value={category}
                   onChange={handleChange("category")}
+                  disabled={loading}
                 >
                   {categories?.map((category) => (
                     <option value={category._id} key={category._id}>
@@ -130,9 +168,16 @@ const CreateProduct = () => {
                 rows={5}
                 value={description}
                 onChange={handleChange("description")}
+                disabled={loading}
               />
             </FormControl>
-            <CustomButton w={"full"} type={"submit"}>
+            <CustomButton
+              w={"full"}
+              type={"submit"}
+              isLoading={loading}
+              loadingText={"Creating..."}
+              disabled={loading || images.length === 0}
+            >
               Create a product
             </CustomButton>
           </VStack>
