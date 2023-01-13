@@ -1,3 +1,4 @@
+import React, { useEffect, useState, useRef } from "react";
 import {
   AspectRatio,
   Box,
@@ -13,26 +14,34 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef } from "react";
+import ReactCrop, { makeAspectCrop, centerCrop } from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 
-import { useState } from "react";
+import { CloseIcon } from "@chakra-ui/icons";
 import ImageInput from "../components/ImageInput";
 
-import ReactCrop from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
-import { CloseIcon } from "@chakra-ui/icons";
+// Set to default crop center
+function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
+  return centerCrop(
+    makeAspectCrop(
+      {
+        unit: "%",
+        width: 90,
+      },
+      aspect,
+      mediaWidth,
+      mediaHeight
+    ),
+    mediaWidth,
+    mediaHeight
+  );
+}
 
 const ImagesUpload = ({ images, setImages }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectFile, setSelectFile] = useState(null);
   const [isModal, setIsModal] = useState(false);
-  const [crop, setcrop] = useState({
-    unit: "%",
-    x: 0,
-    y: 0,
-    width: 100,
-    height: 56.25,
-  });
+  const [crop, setCrop] = useState();
   const [cropped, setCropped] = useState(crop);
 
   const imgRef = useRef();
@@ -47,6 +56,7 @@ const ImagesUpload = ({ images, setImages }) => {
     }
   }, [isModal]);
 
+  // Generate a new croped image
   const preView = () => {
     const image = imgRef.current;
     const canvas = document.createElement("canvas");
@@ -145,21 +155,28 @@ const ImagesUpload = ({ images, setImages }) => {
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          {/* <ModalCloseButton /> */}
           <ModalBody py={6}>
             <Center>
               {selectFile && (
                 <ReactCrop
                   crop={crop}
                   onChange={(crop) => {
-                    setcrop(crop);
+                    setCrop(crop);
                   }}
                   aspect={16 / 9}
                   onComplete={(cropped) => {
                     setCropped(cropped);
                   }}
                 >
-                  <img width={200} src={selectFile} ref={imgRef} />
+                  <img
+                    width={200}
+                    src={selectFile}
+                    ref={imgRef}
+                    onLoad={(e) => {
+                      const { width, height } = e.currentTarget;
+                      setCrop(centerAspectCrop(width, height, 16 / 9));
+                    }}
+                  />
                 </ReactCrop>
               )}
             </Center>
