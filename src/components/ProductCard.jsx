@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
     }
   };
   return (
-    <LinkBox role={"group"}>
+    <LinkBox role={"group"} display="inline-block">
       <Box
         bg={useColorModeValue("white", "gray.800")}
         w={"full"}
@@ -44,14 +44,7 @@ const ProductCard = ({ product }) => {
         rounded="lg"
         shadow="lg"
       >
-        <Box
-          overflow={"hidden"}
-          display={"flex"}
-          // justifyContent="center"
-          // alignItems={"center"}
-          h={"200"}
-          w={"full"}
-        >
+        <Box overflow={"hidden"} display={"flex"} w={"full"}>
           <Image
             src={product?.photos[0]?.secure_url}
             alt={`Picture of ${product?.photos[0]?.public_id}`}
