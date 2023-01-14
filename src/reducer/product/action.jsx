@@ -9,3 +9,7 @@ export const getSingleProdcut = (payload) => ({
   type: PRODUCT_ACTION.GET_SINGLE_PRODUCT,
   payload,
 });
+
+export const reRenderProduct = () => ({
+  type: PRODUCT_ACTION.RE_RENDER_PRODUCT,
+});

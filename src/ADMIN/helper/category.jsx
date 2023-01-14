@@ -1,6 +1,6 @@
 import axios from "axios";
-import { api } from "../../../api";
-import { getLocalUser } from "../../../helper/auth";
+import { api } from "../../api";
+import { getLocalUser } from "../../helper/auth";
 
 export const createcategory = (data, adminId, token) => {
   if (getLocalUser()._id !== adminId) {

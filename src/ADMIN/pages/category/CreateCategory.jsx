@@ -12,7 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { createcategory } from "../helper/category";
+import { createcategory } from "../../helper/category";
 import { useParams } from "react-router-dom";
 import { isAuthenticate } from "../../../helper/auth";
 import { reRenderCategory } from "../../../reducer/category/action";

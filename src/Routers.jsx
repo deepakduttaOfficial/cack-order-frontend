@@ -11,6 +11,7 @@ import Addcardproducts from "./pages/addcardproducts";
 import CreateProduct from "./ADMIN/pages/CreateProduct";
 import AdminRoute from "./helper/AdminRoute";
 import Category from "./ADMIN/pages/category";
+import ManageProduct from "./ADMIN/pages/manageproduct";
 
 const Routers = () => {
   tokenAuth();
@@ -24,6 +25,7 @@ const Routers = () => {
       <Route path="/account/reset-password" element={<RecoveryPassword />} />
       <Route path="/product/:productId" element={<ProductDetails />} />
       <Route path="/addcard" element={<Addcardproducts />} />
+      {/* Product routes */}
       <Route
         path="/admin/:adminId/dashboard/createproduct"
         element={
@@ -32,6 +34,15 @@ const Routers = () => {
           </AdminRoute>
         }
       />
+      <Route
+        path="/admin/:adminId/dashboard/manageproduct"
+        element={
+          <AdminRoute>
+            <ManageProduct />
+          </AdminRoute>
+        }
+      />
+      {/*  Category routes */}
       <Route
         path="/admin/:adminId/dashboard/managecategory"
         element={

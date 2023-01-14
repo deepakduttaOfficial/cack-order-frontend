@@ -9,7 +9,7 @@ import { getallproducts } from "./helper";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { products } = useSelector((state) => state.PRODUCT);
+  const { products, rerender } = useSelector((state) => state.PRODUCT);
   useEffect(() => {
     return () => {
       getallproducts().then((response) => {
@@ -24,7 +24,7 @@ const Home = () => {
         }
       });
     };
-  }, []);
+  }, [rerender]);
   return (
     <Base>
       <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>

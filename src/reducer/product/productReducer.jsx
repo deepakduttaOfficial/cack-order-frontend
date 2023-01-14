@@ -4,6 +4,7 @@ const initialState = {
   search: "",
   products: [],
   singleproduct: {},
+  rerender: false,
 };
 
 export default (state = initialState, action) => {
@@ -12,6 +13,8 @@ export default (state = initialState, action) => {
       return { ...state, products: action.payload };
     case PRODUCT_ACTION.GET_SINGLE_PRODUCT:
       return { ...state, singleproduct: action.payload };
+    case PRODUCT_ACTION.RE_RENDER_PRODUCT:
+      return { ...state, rerender: !state.rerender };
     default:
       return state;
   }

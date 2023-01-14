@@ -6,14 +6,14 @@ import {
   Flex,
   Icon,
   useColorModeValue,
-  Link,
   Drawer,
   DrawerContent,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiCompass, FiStar, FiSettings, FiMenu } from "react-icons/fi";
+import { FiStar, FiSettings, FiMenu } from "react-icons/fi";
 import { BiCategory } from "react-icons/bi";
+import { MdProductionQuantityLimits } from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
 
@@ -32,9 +32,9 @@ const LinkItems = [
     link: `/admin/${getLocalUser()?._id}/dashboard/managecategory`,
   },
   {
-    name: "Explore",
-    icon: FiCompass,
-    link: `/`,
+    name: "Manage Product",
+    icon: MdProductionQuantityLimits,
+    link: `/admin/${getLocalUser()?._id}/dashboard/manageproduct`,
   },
   {
     name: "Favourites",

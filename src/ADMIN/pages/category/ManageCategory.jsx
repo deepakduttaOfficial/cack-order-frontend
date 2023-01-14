@@ -19,7 +19,7 @@ import {
   reRenderCategory,
 } from "../../../reducer/category/action";
 import UpdateCategory from "./UpdateCategory";
-import { removecategory } from "../helper/category";
+import { removecategory } from "../../helper/category";
 import { isAuthenticate } from "../../../helper/auth";
 
 const ManageCategory = () => {

@@ -20,7 +20,7 @@ import { getcategory } from "../../helper/category";
 import ImagesUpload from "../components/ImagesUpload";
 
 import Sidebar from "../components/Sidebar";
-import { createproduct } from "./helper/product";
+import { createproduct } from "../helper/product";
 
 const CreateProduct = () => {
   const { adminId } = useParams();

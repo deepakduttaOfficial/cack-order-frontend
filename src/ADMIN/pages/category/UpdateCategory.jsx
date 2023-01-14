@@ -14,7 +14,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { getonecategory, updatecategory } from "../helper/category";
+import { getonecategory, updatecategory } from "../../helper/category";
 
 import { isAuthenticate } from "../../../helper/auth";
 import { useDispatch } from "react-redux";
