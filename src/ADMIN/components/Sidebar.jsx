@@ -11,7 +11,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FiStar, FiSettings, FiMenu } from "react-icons/fi";
+import { FiUsers, FiSettings, FiMenu } from "react-icons/fi";
 import { BiCategory } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
 
@@ -37,9 +37,9 @@ const LinkItems = [
     link: `/admin/${getLocalUser()?._id}/dashboard/manageproduct`,
   },
   {
-    name: "Favourites",
-    icon: FiStar,
-    link: `/`,
+    name: "User Info",
+    icon: FiUsers,
+    link: `/admin/${getLocalUser()?._id}/dashboard/user-info`,
   },
   {
     name: "Settings",
