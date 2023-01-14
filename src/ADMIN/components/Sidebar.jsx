@@ -12,13 +12,8 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import {
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-} from "react-icons/fi";
+import { FiCompass, FiStar, FiSettings, FiMenu } from "react-icons/fi";
+import { BiCategory } from "react-icons/bi";
 
 import { NavLink } from "react-router-dom";
 
@@ -32,9 +27,9 @@ const LinkItems = [
     link: `/admin/${getLocalUser()?._id}/dashboard/createproduct`,
   },
   {
-    name: "Trending",
-    icon: FiTrendingUp,
-    link: `/`,
+    name: "Manage Category",
+    icon: BiCategory,
+    link: `/admin/${getLocalUser()?._id}/dashboard/managecategory`,
   },
   {
     name: "Explore",
