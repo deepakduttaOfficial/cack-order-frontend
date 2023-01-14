@@ -75,11 +75,12 @@ const CreateCategory = () => {
             Ensure that the category is distinct
           </Text>
 
-          <FormControl id="email" isRequired>
+          <FormControl id="category" isRequired>
             <Input
               placeholder="Create a category"
               _placeholder={{ color: "gray.500" }}
               type="text"
+              value={value}
               onChange={(e) => {
                 setValue(e.target.value);
               }}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import {
   Table,
   Thead,
@@ -10,14 +11,26 @@ import {
   TableContainer,
   useColorModeValue,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import { getcategory } from "../../../helper/category";
-import { getAllCategories } from "../../../reducer/category/action";
+import {
+  getAllCategories,
+  reRenderCategory,
+} from "../../../reducer/category/action";
+import UpdateCategory from "./UpdateCategory";
+import { removecategory } from "../helper/category";
+import { isAuthenticate } from "../../../helper/auth";
 
 const ManageCategory = () => {
   const tableHeadingColor = useColorModeValue("green.600", "green.400");
   const dispatch = useDispatch();
+  const toast = useToast();
   const { categories, rerender } = useSelector((state) => state.CATEGORY);
+  const { adminId } = useParams();
+  const token = isAuthenticate();
+  const [removeLoading, setRemoveLoading] = useState(false);
+
   //Get all category
   useEffect(() => {
     getcategory().then((response) => {
@@ -28,13 +41,31 @@ const ManageCategory = () => {
       }
     });
   }, [rerender]);
-  // Update Category
-  const updateCategory = (id) => {
-    console.log(id);
-  };
 
-  const removeCategory = (id) => {
-    console.log(id);
+  // Remove category
+  const removeCategory = (categoryId) => {
+    setRemoveLoading(true);
+    removecategory(adminId, token, categoryId).then((response) => {
+      setRemoveLoading(categoryId);
+      if (!response.data) {
+        return toast({
+          position: "top-right",
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          position: "top-right",
+          title: "The category was successfully removed",
+          status: "warning",
+          duration: 9000,
+          isClosable: true,
+        });
+        dispatch(reRenderCategory());
+      }
+    });
   };
 
   return (
@@ -56,15 +87,7 @@ const ManageCategory = () => {
               <Td>{category?.name}</Td>
               <Td>{category?.products?.length}</Td>
               <Td>
-                <Button
-                  size={"sm"}
-                  colorScheme="blue"
-                  onClick={() => {
-                    updateCategory(category?._id);
-                  }}
-                >
-                  Update
-                </Button>
+                <UpdateCategory id={category?._id} adminId={adminId} />
               </Td>
               <Td>
                 <Button
@@ -73,22 +96,13 @@ const ManageCategory = () => {
                   onClick={() => {
                     removeCategory(category?._id);
                   }}
+                  isLoading={removeLoading && category?._id === removeLoading}
                 >
                   Remove
                 </Button>
               </Td>
             </Tr>
           ))}
-          {/* <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr> */}
         </Tbody>
       </Table>
     </TableContainer>
