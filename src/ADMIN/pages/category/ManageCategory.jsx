@@ -69,7 +69,7 @@ const ManageCategory = () => {
   };
 
   return (
-    <TableContainer>
+    <TableContainer bgColor={useColorModeValue("white", "gray.900")}>
       <Table variant="simple">
         <Thead>
           <Tr>

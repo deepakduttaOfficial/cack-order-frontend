@@ -12,6 +12,7 @@ import CreateProduct from "./ADMIN/pages/CreateProduct";
 import AdminRoute from "./helper/AdminRoute";
 import Category from "./ADMIN/pages/category";
 import ManageProduct from "./ADMIN/pages/manageproduct";
+import UpdateProduct from "./ADMIN/pages/manageproduct/UpdateProduct";
 
 const Routers = () => {
   tokenAuth();
@@ -39,6 +40,14 @@ const Routers = () => {
         element={
           <AdminRoute>
             <ManageProduct />
+          </AdminRoute>
+        }
+      />
+      <Route
+        path="/admin/:adminId/dashboard/updateproduct/:productId"
+        element={
+          <AdminRoute>
+            <UpdateProduct />
           </AdminRoute>
         }
       />

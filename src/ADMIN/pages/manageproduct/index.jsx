@@ -15,6 +15,9 @@ import {
   Center,
   Heading,
   Badge,
+  AspectRatio,
+  Image,
+  VStack,
 } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import { getallproducts } from "../../../pages/home/helper";
@@ -34,21 +37,19 @@ const ManageProduct = () => {
   const token = isAuthenticate();
   const { products, rerender } = useSelector((state) => state.PRODUCT);
   useEffect(() => {
-    if (products.length === 0) {
-      getallproducts().then((response) => {
-        if (!response.data) {
-          return toast({
-            position: "top-right",
-            title: response.error.message || "Something went wrong",
-            status: "error",
-            duration: 9000,
-            isClosable: true,
-          });
-        } else {
-          dispatch(getAllProdcuts(response?.data?.products));
-        }
-      });
-    }
+    getallproducts().then((response) => {
+      if (!response.data) {
+        return toast({
+          position: "top-right",
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        dispatch(getAllProdcuts(response?.data?.products));
+      }
+    });
   }, [rerender]);
 
   // Remove product
@@ -79,17 +80,18 @@ const ManageProduct = () => {
 
   return (
     <Sidebar>
-      <Center my={10}>
-        <Heading>Manage Product</Heading>
-        <Badge variant="subtle" colorScheme="green" ml={2}>
+      <VStack my={10}>
+        <Badge variant="subtle" colorScheme="green">
           ADMIN
         </Badge>
-      </Center>
-      <TableContainer>
+        <Heading>Manage Product</Heading>
+      </VStack>
+      <TableContainer bgColor={useColorModeValue("white", "gray.900")}>
         <Table variant="simple">
           <Thead>
             <Tr>
               <Th color={tableHeadingColor}># index</Th>
+              <Th color={tableHeadingColor}>images</Th>
               <Th color={tableHeadingColor}>product</Th>
               <Th color={tableHeadingColor} isNumeric>
                 price
@@ -100,9 +102,7 @@ const ManageProduct = () => {
               <Th color={tableHeadingColor} isNumeric>
                 stock
               </Th>
-              <Th color={tableHeadingColor} isNumeric>
-                details
-              </Th>
+              <Th color={tableHeadingColor}>details</Th>
               <Th color={useColorModeValue("blue.600", "blue.400")}>update</Th>
               <Th color={useColorModeValue("red.600", "red.400")}>Remove</Th>
             </Tr>
@@ -111,6 +111,11 @@ const ManageProduct = () => {
             {products.map((product, index) => (
               <Tr key={product?._id}>
                 <Td># {index}</Td>
+                <Td>
+                  <AspectRatio ratio={16 / 9}>
+                    <Image src={product?.photos[0]?.secure_url} />
+                  </AspectRatio>
+                </Td>
                 <Td>{product?.name}</Td>
                 <Td isNumeric>{product?.price}</Td>
                 <Td isNumeric>{product?.sold}</Td>
@@ -124,10 +129,8 @@ const ManageProduct = () => {
                   <Button
                     size={"sm"}
                     colorScheme="blue"
-                    onClick={() => {
-                      // removeCategory(category?._id);
-                    }}
-                    // isLoading={removeLoading && category?._id === removeLoading}
+                    as={NavLink}
+                    to={`/admin/${adminId}/dashboard/updateproduct/${product?._id}`}
                   >
                     Update
                   </Button>

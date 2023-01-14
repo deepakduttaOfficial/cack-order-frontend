@@ -42,3 +42,22 @@ export const removeproduct = (adminId, token, productId) => {
       return { error: error.response.data };
     });
 };
+
+export const updateproduct = (data, adminId, token, productId) => {
+  if (getLocalUser()._id !== adminId) {
+    return { error: "User not authenticate" };
+  }
+  return axios(`${api}/product/update/${adminId}/${productId}`, {
+    method: "put",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data,
+  })
+    .then((response) => {
+      return { data: response.data };
+    })
+    .catch((error) => {
+      return { error: error.response.data };
+    });
+};
