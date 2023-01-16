@@ -16,6 +16,8 @@ import UpdateProduct from "./ADMIN/pages/manageproduct/UpdateProduct";
 import UserInfo from "./ADMIN/pages/user/UserInfo";
 import GraphView from "./ADMIN/pages/graph_view";
 import ManageOrder from "./ADMIN/pages/manageOrder";
+import Profile from "./pages/USER_INFO/pages/profile";
+import ProtectedRoute from "./helper/ProtectedRoute";
 
 const Routers = () => {
   tokenAuth();
@@ -87,6 +89,15 @@ const Routers = () => {
           <AdminRoute>
             <GraphView />
           </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/profile/:userId"
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
         }
       />
     </Routes>

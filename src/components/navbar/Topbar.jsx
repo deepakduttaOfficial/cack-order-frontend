@@ -102,17 +102,29 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
                     <Avatar name={user?.name} src={user?.photo?.secure_url} />
                   </MenuButton>
                   <MenuList>
+                    {getLocalUser()?.role === "ADMIN" && (
+                      <>
+                        <MenuItem
+                          color={useColorModeValue("green.600", "green.200")}
+                          as={NavLink}
+                          to={`/admin/${
+                            getLocalUser()?._id
+                          }/dashboard/createproduct`}
+                        >
+                          ADMIN DASHBOARD
+                          <MenuDivider />
+                        </MenuItem>
+                      </>
+                    )}
+
                     <MenuItem
-                      color={useColorModeValue("green.600", "green.200")}
                       as={NavLink}
-                      to={`/admin/${
-                        getLocalUser()?._id
-                      }/dashboard/createproduct`}
+                      to={`/profile/${getLocalUser()?._id}`}
                     >
-                      ADMIN DASHBOARD
+                      PROFILE
                     </MenuItem>
-                    <MenuItem>Link 2</MenuItem>
                     <MenuDivider />
+
                     <MenuItem
                       onClick={() => {
                         signout(() => {
