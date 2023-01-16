@@ -14,6 +14,7 @@ import Category from "./ADMIN/pages/category";
 import ManageProduct from "./ADMIN/pages/manageproduct";
 import UpdateProduct from "./ADMIN/pages/manageproduct/UpdateProduct";
 import UserInfo from "./ADMIN/pages/user/UserInfo";
+import GraphView from "./ADMIN/pages/graph_view";
 
 const Routers = () => {
   tokenAuth();
@@ -67,6 +68,15 @@ const Routers = () => {
         element={
           <AdminRoute>
             <UserInfo />
+          </AdminRoute>
+        }
+      />
+
+      <Route
+        path="/admin/:adminId/dashboard/graph-view"
+        element={
+          <AdminRoute>
+            <GraphView />
           </AdminRoute>
         }
       />
