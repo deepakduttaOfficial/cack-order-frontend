@@ -40,7 +40,7 @@ const Order_graph = () => {
         px={"5"}
         color={useColorModeValue("gray.500", "gray.400")}
       >
-        This Chart illustrates the number of User/month
+        This Chart illustrates the number of Order/month
       </Heading>
       <Box bgColor="white" w={"full"}>
         <Graph_Comp createdMonth={createdMonth} label={"Order"} />

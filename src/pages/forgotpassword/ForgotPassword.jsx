@@ -10,11 +10,13 @@ import {
   Image,
   Alert,
   AlertIcon,
+  Button,
 } from "@chakra-ui/react";
 import CustomButton from "../../components/CustomButton";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { forgotpassword } from "./helper";
+import { NavLink } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [values, setValues] = useState({
@@ -104,7 +106,7 @@ const ForgotPassword = () => {
               required
             />
           </FormControl>
-          <Stack spacing={6} mt={4}>
+          <Stack mt={4}>
             <CustomButton
               isLoading={loading}
               spinnerPlacement="end"
@@ -113,6 +115,9 @@ const ForgotPassword = () => {
             >
               Request Reset
             </CustomButton>
+            <Button as={NavLink} to="/e/signin">
+              Cencel
+            </Button>
           </Stack>
         </form>
       </Stack>

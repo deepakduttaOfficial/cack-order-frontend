@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { getsingleproduct } from "../../../pages/productdetails/helper";
 import Sidebar from "../../components/Sidebar";
 import {
+  Button,
   Center,
   FormControl,
   FormLabel,
@@ -23,6 +24,7 @@ import ImagesUpload from "../../components/ImagesUpload";
 import { updateproduct } from "../../helper/product";
 import { isAuthenticate } from "../../../helper/auth";
 import { reRenderProduct } from "../../../reducer/product/action";
+import { BiArrowBack } from "react-icons/bi";
 
 const UpdateProduct = () => {
   const { adminId, productId } = useParams();
@@ -118,6 +120,9 @@ const UpdateProduct = () => {
 
   return (
     <Sidebar>
+      <Button mt={{ base: "2", md: 5 }} onClick={() => navigate(-1)}>
+        <BiArrowBack />
+      </Button>
       <Stack
         mx={"auto"}
         maxW={{ base: "full", sm: "lg" }}
@@ -125,7 +130,7 @@ const UpdateProduct = () => {
         px={{ base: "2", sm: 6 }}
         bg={useColorModeValue("white", "gray.900")}
         rounded="md"
-        mt={{ base: "2", md: 12 }}
+        //
       >
         <form onSubmit={handleSubmit}>
           <VStack spacing={5}>

@@ -10,9 +10,10 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
+  Button,
 } from "@chakra-ui/react";
 import { FiUsers, FiSettings, FiMenu } from "react-icons/fi";
-import { BiCategory } from "react-icons/bi";
+import { BiCategory, BiArrowBack, BiLineChart } from "react-icons/bi";
 import { MdProductionQuantityLimits } from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
@@ -42,8 +43,8 @@ const LinkItems = [
     link: `/admin/${getLocalUser()?._id}/dashboard/user-info`,
   },
   {
-    name: "Graphic view",
-    icon: FiSettings,
+    name: "Chart",
+    icon: BiLineChart,
     link: `/admin/${getLocalUser()?._id}/dashboard/graph-view`,
   },
 ];
@@ -91,7 +92,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          <Button mr={5} as={NavLink} to="/">
+            <BiArrowBack />
+          </Button>
+          Misti
         </Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
@@ -162,7 +166,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
+        Misti
       </Text>
     </Flex>
   );
