@@ -14,7 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { FiUsers, FiSettings, FiMenu } from "react-icons/fi";
 import { BiCategory, BiArrowBack, BiLineChart } from "react-icons/bi";
-import { MdProductionQuantityLimits } from "react-icons/md";
+import {
+  MdProductionQuantityLimits,
+  MdOutlineDeliveryDining,
+} from "react-icons/md";
 
 import { NavLink } from "react-router-dom";
 
@@ -43,18 +46,23 @@ const LinkItems = [
     link: `/admin/${getLocalUser()?._id}/dashboard/user-info`,
   },
   {
+    name: "Manage orders",
+    icon: MdOutlineDeliveryDining,
+    link: `/admin/${getLocalUser()?._id}/dashboard/manageorder`,
+  },
+  {
     name: "Chart",
     icon: BiLineChart,
     link: `/admin/${getLocalUser()?._id}/dashboard/graph-view`,
   },
 ];
 
-export default function Sidebar({ children, ...rest }) {
+export default function Sidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
-        onClose={() => onClose}
+        onClose={onClose}
         display={{ base: "none", md: "block" }}
       />
       <Drawer
@@ -72,7 +80,7 @@ export default function Sidebar({ children, ...rest }) {
       </Drawer>
 
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4" {...rest}>
+      <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
     </Box>
@@ -130,16 +138,15 @@ const NavItem = ({ icon, link, children, ...rest }) => {
       }
       {...rest}
     >
-      {icon && (
-        <Icon
-          mr="4"
-          fontSize="16"
-          _groupHover={{
-            color: useColorModeValue("black", "white"),
-          }}
-          as={icon}
-        />
-      )}
+      <Icon
+        mr="4"
+        fontSize="16"
+        _groupHover={{
+          color: useColorModeValue("black", "white"),
+        }}
+        as={icon}
+      />
+
       {children}
     </Flex>
   );

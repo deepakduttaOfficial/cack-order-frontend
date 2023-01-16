@@ -15,3 +15,19 @@ export const getallorders = (adminId, token) => {
       return { error: error.response.data };
     });
 };
+
+export const updateorderstatus = (adminId, token, orderId, data) => {
+  return axios(`${api}/admin/dashboard/${adminId}/orders/${orderId}`, {
+    method: "put",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    data,
+  })
+    .then((response) => {
+      return { data: response.data };
+    })
+    .catch((error) => {
+      return { error: error.response.data };
+    });
+};
