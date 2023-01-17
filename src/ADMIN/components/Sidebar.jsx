@@ -24,39 +24,6 @@ import { NavLink } from "react-router-dom";
 import { MdCreateNewFolder } from "react-icons/md";
 import { getLocalUser } from "../../helper/auth";
 
-const LinkItems = [
-  {
-    name: "Create product",
-    icon: MdCreateNewFolder,
-    link: `/admin/${getLocalUser()?._id}/dashboard/createproduct`,
-  },
-  {
-    name: "Manage Category",
-    icon: BiCategory,
-    link: `/admin/${getLocalUser()?._id}/dashboard/managecategory`,
-  },
-  {
-    name: "Manage Product",
-    icon: MdProductionQuantityLimits,
-    link: `/admin/${getLocalUser()?._id}/dashboard/manageproduct`,
-  },
-  {
-    name: "User Info",
-    icon: FiUsers,
-    link: `/admin/${getLocalUser()?._id}/dashboard/user-info`,
-  },
-  {
-    name: "Manage orders",
-    icon: MdOutlineDeliveryDining,
-    link: `/admin/${getLocalUser()?._id}/dashboard/manageorder`,
-  },
-  {
-    name: "Chart",
-    icon: BiLineChart,
-    link: `/admin/${getLocalUser()?._id}/dashboard/graph-view`,
-  },
-];
-
 export default function Sidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
@@ -88,6 +55,38 @@ export default function Sidebar({ children }) {
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const LinkItems = [
+    {
+      name: "Create product",
+      icon: MdCreateNewFolder,
+      link: `/admin/${getLocalUser()?._id}/dashboard/createproduct`,
+    },
+    {
+      name: "Manage Category",
+      icon: BiCategory,
+      link: `/admin/${getLocalUser()?._id}/dashboard/managecategory`,
+    },
+    {
+      name: "Manage Product",
+      icon: MdProductionQuantityLimits,
+      link: `/admin/${getLocalUser()?._id}/dashboard/manageproduct`,
+    },
+    {
+      name: "User Info",
+      icon: FiUsers,
+      link: `/admin/${getLocalUser()?._id}/dashboard/user-info`,
+    },
+    {
+      name: "Manage orders",
+      icon: MdOutlineDeliveryDining,
+      link: `/admin/${getLocalUser()?._id}/dashboard/manageorder`,
+    },
+    {
+      name: "Chart",
+      icon: BiLineChart,
+      link: `/admin/${getLocalUser()?._id}/dashboard/graph-view`,
+    },
+  ];
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
