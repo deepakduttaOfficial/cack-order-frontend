@@ -71,18 +71,20 @@ const ProdcutDetailsCard = () => {
       </HStack>
       <Text fontSize="md" fontWeight="normal" color={themeColor}>
         {showMore ? `${description}` : `${description?.substring(0, 200)}`}
-        {description?.length > 200 && (
-          <Link
-            color={useColorModeValue("black", "white")}
-            onClick={() => {
-              setShowMore((preVal) => !preVal);
-            }}
-            cursor="pointer"
-            _hover={{ textDecoration: "underline" }}
-          >
-            {showMore ? "...show less" : "...show more"}
-          </Link>
-        )}
+        <Link
+          color={useColorModeValue("black", "white")}
+          onClick={() => {
+            setShowMore((preVal) => !preVal);
+          }}
+          cursor="pointer"
+          _hover={{ textDecoration: "underline" }}
+        >
+          {description && description.length > 200
+            ? showMore
+              ? "...show less"
+              : "...show more"
+            : ""}
+        </Link>
       </Text>
       <VStack>
         <HStack>
