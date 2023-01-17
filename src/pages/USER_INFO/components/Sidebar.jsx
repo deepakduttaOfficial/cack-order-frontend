@@ -16,23 +16,11 @@ import { CgProfile } from "react-icons/cg";
 import { FiMenu } from "react-icons/fi";
 import { BiArrowBack } from "react-icons/bi";
 import { MdOutlineDeliveryDining } from "react-icons/md";
+import { RiLockPasswordFill } from "react-icons/ri";
 
 import { NavLink } from "react-router-dom";
 
 import { getLocalUser } from "../../../helper/auth";
-
-const LinkItems = [
-  {
-    name: "Profile",
-    icon: CgProfile,
-    link: `/profile/${getLocalUser()?._id}`,
-  },
-  {
-    name: "Orders",
-    icon: MdOutlineDeliveryDining,
-    link: `/profile/order/${getLocalUser()?._id}`,
-  },
-];
 
 export default function Sidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -65,6 +53,23 @@ export default function Sidebar({ children }) {
 }
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const LinkItems = [
+    {
+      name: "Profile",
+      icon: CgProfile,
+      link: `/profile/${getLocalUser()?._id}`,
+    },
+    {
+      name: "Orders",
+      icon: MdOutlineDeliveryDining,
+      link: `/profile/order/${getLocalUser()?._id}`,
+    },
+    {
+      name: "Update password",
+      icon: RiLockPasswordFill,
+      link: `/profile/update-password/${getLocalUser()?._id}`,
+    },
+  ];
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}

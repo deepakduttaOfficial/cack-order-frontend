@@ -19,6 +19,7 @@ import ManageOrder from "./ADMIN/pages/manageOrder";
 import Profile from "./pages/USER_INFO/pages/profile";
 import ProtectedRoute from "./helper/ProtectedRoute";
 import Order from "./pages/USER_INFO/pages/order";
+import PasswordUpdate from "./pages/USER_INFO/pages/PasswordUpdate";
 
 const Routers = () => {
   tokenAuth();
@@ -107,6 +108,15 @@ const Routers = () => {
         element={
           <ProtectedRoute>
             <Order />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        e
+        path="/profile/update-password/:userId"
+        element={
+          <ProtectedRoute>
+            <PasswordUpdate />
           </ProtectedRoute>
         }
       />
