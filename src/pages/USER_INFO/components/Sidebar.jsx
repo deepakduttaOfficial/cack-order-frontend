@@ -30,7 +30,7 @@ const LinkItems = [
   {
     name: "Orders",
     icon: MdOutlineDeliveryDining,
-    link: `/admin/${getLocalUser()?._id}/dashboard/managecategory`,
+    link: `/profile/order/${getLocalUser()?._id}`,
   },
 ];
 

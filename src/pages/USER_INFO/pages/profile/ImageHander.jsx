@@ -1,4 +1,4 @@
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   AvatarBadge,
@@ -8,6 +8,7 @@ import {
   IconButton,
   Input,
   useToast,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
@@ -55,27 +56,30 @@ const ImageHander = () => {
   };
   return (
     <HStack w={"fit-content"} mb={10}>
-      <Center>
-        {loading ? (
-          <Spinner thickness="4px" speed="0.65s" color="blue.500" size="xl" />
-        ) : (
-          <Avatar size="xl" src={user?.photo?.secure_url}>
-            <AvatarBadge
-              as={IconButton}
-              size="sm"
-              display
-              rounded="full"
-              top="-10px"
-              colorScheme="red"
-              aria-label="remove Image"
-              icon={<SmallCloseIcon />}
-            />
-          </Avatar>
-        )}
-      </Center>
-      <Center w="full">
-        <Input type={"file"} onChange={handleChange} disabled={loading} />
-      </Center>
+      <VStack w="full">
+        <Center>
+          {loading ? (
+            <Spinner thickness="4px" speed="0.65s" color="blue.500" size="xl" />
+          ) : (
+            <Avatar size="xl" src={user?.photo?.secure_url}>
+              <AvatarBadge size="sm" display rounded="full" top="-10px" />
+            </Avatar>
+          )}
+        </Center>
+        <HStack position={"relative"} justifyContent="center" w={"5"} h="5">
+          <EditIcon />
+          <Input
+            position={"absolute"}
+            type={"file"}
+            onChange={handleChange}
+            disabled={loading}
+            w={4}
+            h={5}
+            zIndex={"overlay"}
+            opacity={0}
+          />
+        </HStack>
+      </VStack>
     </HStack>
   );
 };

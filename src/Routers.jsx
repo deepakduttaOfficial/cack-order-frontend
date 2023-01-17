@@ -18,6 +18,7 @@ import GraphView from "./ADMIN/pages/graph_view";
 import ManageOrder from "./ADMIN/pages/manageOrder";
 import Profile from "./pages/USER_INFO/pages/profile";
 import ProtectedRoute from "./helper/ProtectedRoute";
+import Order from "./pages/USER_INFO/pages/order";
 
 const Routers = () => {
   tokenAuth();
@@ -97,6 +98,15 @@ const Routers = () => {
         element={
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/profile/order/:userId"
+        element={
+          <ProtectedRoute>
+            <Order />
           </ProtectedRoute>
         }
       />
