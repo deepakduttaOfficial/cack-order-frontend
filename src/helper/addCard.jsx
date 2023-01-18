@@ -26,6 +26,16 @@ export const getaddcard = () => {
   }
 };
 
+export const removeAlladdcard = () => {
+  if (typeof window !== "undefined") {
+    if (localStorage.getItem("add_card")) {
+      localStorage.removeItem("add_card");
+    }
+  } else {
+    return false;
+  }
+};
+
 export const removeaddcard = (id) => {
   if (typeof window !== "undefined") {
     if (localStorage.getItem("add_card")) {

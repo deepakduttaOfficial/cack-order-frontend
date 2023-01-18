@@ -51,7 +51,7 @@ const UserOrders = ({ orders }) => {
                 <Td># {index}</Td>
 
                 <Td>{order?.orderItems?.length}</Td>
-                <Td>{order?.paymentInfo?.id}</Td>
+                <Td>{order?.paymentInfo?.razorpay_order_id}</Td>
                 <Td>{dateFormater(order.createdAt)}</Td>
                 <Td>
                   {order?.orderStatus === "SHIPPED" ? (

@@ -22,6 +22,7 @@
     "react-icons": "^4.7.1",
     "react-image-crop": "^10.0.9",
     "react-image-gallery": "^1.2.11",
+    "react-razorpay": "^1.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "react-toastify": "^9.1.1",

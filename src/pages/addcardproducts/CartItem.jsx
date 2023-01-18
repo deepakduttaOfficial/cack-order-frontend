@@ -133,7 +133,13 @@ const CartItem = (props) => {
           md: "none",
         }}
       >
-        <Link fontSize="sm" textDecor="underline">
+        <Link
+          fontSize="sm"
+          textDecor="underline"
+          onClick={() => {
+            onClickDelete(props._id);
+          }}
+        >
           Delete
         </Link>
 

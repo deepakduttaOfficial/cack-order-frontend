@@ -72,7 +72,7 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
             <Box
               mr="2"
               as={NavLink}
-              to="/addcard"
+              to={`/addcard`}
               position={"relative"}
               rounded="full"
               p={"1"}
