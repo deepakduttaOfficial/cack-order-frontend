@@ -17,6 +17,7 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  FormHelperText,
 } from "@chakra-ui/react";
 import CustomButton from "../../components/CustomButton";
 import { signup } from "./helper";
@@ -68,6 +69,13 @@ const Signup = () => {
       }
     });
   };
+
+  const disabled =
+    loading ||
+    name.length === 0 ||
+    email.length === 0 ||
+    password.length < 4 ||
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
   return (
     <Flex
@@ -127,6 +135,9 @@ const Signup = () => {
                     </Button>
                   </InputRightElement>
                 </InputGroup>
+                <FormHelperText>
+                  The minimum required length for a password is 4 characters.
+                </FormHelperText>
               </FormControl>
               <Stack spacing={5}>
                 <CustomButton
@@ -134,6 +145,7 @@ const Signup = () => {
                   isLoading={loading}
                   loadingText={"Submiting"}
                   spinnerPlacement="end"
+                  disabled={disabled}
                 >
                   Sign up
                 </CustomButton>

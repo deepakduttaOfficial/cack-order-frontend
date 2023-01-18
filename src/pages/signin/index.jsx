@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   Flex,
   Box,
@@ -17,12 +16,14 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import CustomButton from "../../components/CustomButton";
 import { signin } from "./helper";
 import { authenticate, isAuthenticate, setLocalUser } from "../../helper/auth";
 
 export default function Signin() {
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
     email: "",
@@ -53,17 +54,21 @@ export default function Signin() {
     signin({ email, password }).then((response) => {
       if (!response.data) {
         setValues({ ...values, loading: false, error: true, success: false });
-        return toast(response.error.message || "Something went wrong", {
-          type: "error",
-          theme: "colored",
-          autoClose: 2000,
+        return toast({
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
         });
       } else {
         setValues({ ...values, loading: false, error: false, success: true });
-        toast("Successfully sign in ", {
-          type: "success",
-          theme: "colored",
-          autoClose: 5000,
+        toast({
+          title: "Successfully sign in",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
         });
         authenticate(response.data?.sign_in);
         setLocalUser(response.data?.user);
@@ -72,6 +77,12 @@ export default function Signin() {
       }
     });
   };
+
+  const disabled =
+    loading ||
+    email.length === 0 ||
+    password.length === 0 ||
+    !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
 
   return (
     <Flex
@@ -143,6 +154,7 @@ export default function Signin() {
                   isLoading={loading}
                   spinnerPlacement="end"
                   loadingText="Submiting"
+                  disabled={disabled}
                 >
                   Sigin in
                 </CustomButton>
