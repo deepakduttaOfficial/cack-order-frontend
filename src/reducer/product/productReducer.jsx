@@ -2,6 +2,8 @@ import PRODUCT_ACTION from "../../actionTypes/product.action";
 
 const initialState = {
   search: "",
+  minPrice: "",
+  maxPrice: "",
   products: [],
   singleproduct: {},
   rerender: false,
@@ -17,6 +19,12 @@ export default (state = initialState, action) => {
       return { ...state, rerender: !state.rerender };
     case PRODUCT_ACTION.SEARCH_BAR:
       return { ...state, search: action.payload };
+    case PRODUCT_ACTION.FILTER_PRODUCT:
+      return {
+        ...state,
+        minPrice: action.payload?.minPrice || state.minPrice,
+        maxPrice: action.payload?.maxPrice || state.maxPrice,
+      };
     default:
       return state;
   }

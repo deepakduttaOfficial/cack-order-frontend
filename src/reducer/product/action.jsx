@@ -18,3 +18,8 @@ export const searchBar = (payload) => ({
   type: PRODUCT_ACTION.SEARCH_BAR,
   payload,
 });
+
+export const filterProduct = (payload) => ({
+  type: PRODUCT_ACTION.FILTER_PRODUCT,
+  payload,
+});

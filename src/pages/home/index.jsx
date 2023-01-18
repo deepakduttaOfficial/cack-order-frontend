@@ -1,4 +1,4 @@
-import { Grid, HStack, Progress, Skeleton } from "@chakra-ui/react";
+import { Grid, HStack, Progress, Skeleton, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,27 +9,28 @@ import { getallproducts } from "./helper";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
-  const { products, rerender, search } = useSelector((state) => state.PRODUCT);
+  const { products, rerender, search, minPrice, maxPrice } = useSelector(
+    (state) => state.PRODUCT
+  );
   useEffect(() => {
     setLoading(true);
-    getallproducts(search).then((response) => {
+    getallproducts({ search, minPrice, maxPrice }).then((response) => {
       setLoading(false);
       if (!response.data) {
-        return toast(response.error.message || "Something went wrong", {
-          type: "error",
-          theme: "colored",
-          autoClose: 2000,
+        return toast({
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
         });
       } else {
         dispatch(getAllProdcuts(response?.data?.products));
       }
     });
-  }, [rerender, search]);
-
-  {
-    Array(9).fill(" ");
-  }
+  }, [rerender, search, minPrice, maxPrice]);
 
   return (
     <Base>
