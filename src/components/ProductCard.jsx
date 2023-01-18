@@ -56,14 +56,14 @@ const ProductCard = ({ product }) => {
 
         <Box px="4" py={"6"}>
           <Box d="flex" alignItems="baseline">
-            <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+            <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="green">
               New
             </Badge>
           </Box>
           <LinkOverlay as={NavLink} to={`/product/${product?._id}`}>
             <Flex mt="1" justifyContent="space-between" alignContent="center">
               <Box
-                fontSize="2xl"
+                fontSize="lg"
                 fontWeight="semibold"
                 as="h4"
                 lineHeight="tight"

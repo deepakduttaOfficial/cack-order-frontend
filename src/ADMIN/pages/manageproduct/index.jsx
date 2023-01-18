@@ -21,7 +21,10 @@ import {
 } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import { getallproducts } from "../../../pages/home/helper";
-import { getAllProdcuts } from "../../../reducer/product/action";
+import {
+  getAllProdcuts,
+  reRenderProduct,
+} from "../../../reducer/product/action";
 import { NavLink, useParams } from "react-router-dom";
 import { removeproduct } from "../../helper/product";
 import { isAuthenticate } from "../../../helper/auth";

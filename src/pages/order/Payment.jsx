@@ -31,7 +31,7 @@ const Payment = ({ setStep }) => {
       });
     }
     const options = {
-      key: "rzp_test_jPi0K80KwTE7jY",
+      key: import.meta.env.VITE_RAZORPAY_PUBLIC_KEY,
       amount: createOrder.totalAmount,
       currency: "INR",
       name: "Misti shop",

@@ -43,8 +43,8 @@ const ImagesUpload = ({ images, setImages, loading }) => {
   const [isModal, setIsModal] = useState(false);
   const [crop, setCrop] = useState();
   const [cropped, setCropped] = useState(crop);
-
   const imgRef = useRef();
+  let ratio = 1;
 
   useEffect(() => {
     if (isModal) {
@@ -112,7 +112,7 @@ const ImagesUpload = ({ images, setImages, loading }) => {
                 }}
                 cursor="pointer"
               />
-              <AspectRatio w={"470px"} ratio={16 / 9}>
+              <AspectRatio w={"200px"} ratio={ratio}>
                 <Image src={URL.createObjectURL(images[0])} w="full" />
               </AspectRatio>
             </Box>
@@ -135,7 +135,7 @@ const ImagesUpload = ({ images, setImages, loading }) => {
                   }}
                   cursor="pointer"
                 />
-                <AspectRatio w={"150px"} ratio={16 / 9}>
+                <AspectRatio w={"100px"} ratio={ratio}>
                   <Image src={URL.createObjectURL(images[index])} w="full" />
                 </AspectRatio>
               </Box>
@@ -164,7 +164,7 @@ const ImagesUpload = ({ images, setImages, loading }) => {
                   onChange={(crop) => {
                     setCrop(crop);
                   }}
-                  aspect={16 / 9}
+                  aspect={ratio}
                   onComplete={(cropped) => {
                     setCropped(cropped);
                   }}
@@ -175,7 +175,7 @@ const ImagesUpload = ({ images, setImages, loading }) => {
                     ref={imgRef}
                     onLoad={(e) => {
                       const { width, height } = e.currentTarget;
-                      setCrop(centerAspectCrop(width, height, 16 / 9));
+                      setCrop(centerAspectCrop(width, height, ratio));
                     }}
                   />
                 </ReactCrop>
