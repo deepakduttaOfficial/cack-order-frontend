@@ -11,19 +11,17 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, rerender } = useSelector((state) => state.PRODUCT);
   useEffect(() => {
-    return () => {
-      getallproducts().then((response) => {
-        if (!response.data) {
-          return toast(response.error.message || "Something went wrong", {
-            type: "error",
-            theme: "colored",
-            autoClose: 2000,
-          });
-        } else {
-          dispatch(getAllProdcuts(response?.data?.products));
-        }
-      });
-    };
+    getallproducts().then((response) => {
+      if (!response.data) {
+        return toast(response.error.message || "Something went wrong", {
+          type: "error",
+          theme: "colored",
+          autoClose: 2000,
+        });
+      } else {
+        dispatch(getAllProdcuts(response?.data?.products));
+      }
+    });
   }, [rerender]);
   return (
     <Base>
