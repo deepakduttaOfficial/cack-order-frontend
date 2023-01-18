@@ -6,6 +6,8 @@ import {
   Select,
   Textarea,
   HStack,
+  FormControl,
+  Button,
 } from "@chakra-ui/react";
 
 const Sidebar = ({ onClose, ...rest }) => {
@@ -49,10 +51,13 @@ const Sidebar = ({ onClose, ...rest }) => {
           </Select>
         </Box>
 
-        <Box>
-          <FormLabel htmlFor="desc">Description</FormLabel>
-          <Textarea id="desc" />
-        </Box>
+        <FormControl>
+          <FormLabel disabled>Your Feedback</FormLabel>
+          <Textarea disabled />
+          <Button mt={"3"} colorScheme="blue" w={"full"} disabled>
+            Feedback
+          </Button>
+        </FormControl>
       </Stack>
     </Box>
   );
