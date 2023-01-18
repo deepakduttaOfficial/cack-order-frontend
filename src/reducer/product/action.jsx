@@ -13,3 +13,8 @@ export const getSingleProdcut = (payload) => ({
 export const reRenderProduct = () => ({
   type: PRODUCT_ACTION.RE_RENDER_PRODUCT,
 });
+
+export const searchBar = (payload) => ({
+  type: PRODUCT_ACTION.SEARCH_BAR,
+  payload,
+});

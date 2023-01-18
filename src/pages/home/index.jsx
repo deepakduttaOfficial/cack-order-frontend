@@ -10,11 +10,10 @@ import { getallproducts } from "./helper";
 const Home = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
-  const { products, rerender } = useSelector((state) => state.PRODUCT);
+  const { products, rerender, search } = useSelector((state) => state.PRODUCT);
   useEffect(() => {
     setLoading(true);
-    getallproducts().then((response) => {
+    getallproducts(search).then((response) => {
       setLoading(false);
       if (!response.data) {
         return toast(response.error.message || "Something went wrong", {
@@ -26,9 +25,8 @@ const Home = () => {
         dispatch(getAllProdcuts(response?.data?.products));
       }
     });
-  }, [rerender]);
+  }, [rerender, search]);
 
-  // console.log(loading);
   {
     Array(9).fill(" ");
   }

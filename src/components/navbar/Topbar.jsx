@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
   Flex,
@@ -30,12 +30,14 @@ import { getLocalUser, isAuthenticate, signout } from "../../helper/auth";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { getaddcard } from "../../helper/addCard";
+import { searchBar } from "../../reducer/product/action";
 
 const Topbar = ({ isOpen, onOpen, onClose }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const navigate = useNavigate();
   const user = getLocalUser();
   const { sidebarIcon } = useSelector((state) => state.UI);
+  const dispatch = useDispatch();
   return (
     <>
       <Box
@@ -55,7 +57,13 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
               pointerEvents="none"
               children={<BiSearch color="gray.300" />}
             />
-            <Input type="search" placeholder="whitch cack do you want..." />
+            <Input
+              type="search"
+              placeholder="whitch cack do you want..."
+              onChange={(e) => {
+                dispatch(searchBar(e.target.value));
+              }}
+            />
           </InputGroup>
 
           <Flex alignItems={"center"}>

@@ -15,6 +15,8 @@ export default (state = initialState, action) => {
       return { ...state, singleproduct: action.payload };
     case PRODUCT_ACTION.RE_RENDER_PRODUCT:
       return { ...state, rerender: !state.rerender };
+    case PRODUCT_ACTION.SEARCH_BAR:
+      return { ...state, search: action.payload };
     default:
       return state;
   }
