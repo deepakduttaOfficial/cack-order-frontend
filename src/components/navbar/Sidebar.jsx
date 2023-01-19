@@ -41,7 +41,7 @@ const Sidebar = ({ onClose, ...rest }) => {
       h="full"
       pt={"20"}
       px={"3"}
-      position="relative"
+      // position="relative"
       {...rest}
     >
       <IconButton
