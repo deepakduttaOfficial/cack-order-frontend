@@ -12,12 +12,14 @@ import {
   Button,
   Link,
   useToast,
-  Center,
   Heading,
   Badge,
   AspectRatio,
   Image,
   VStack,
+  InputGroup,
+  InputLeftElement,
+  Input,
 } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import { getallproducts } from "../../../pages/home/helper";
@@ -28,19 +30,27 @@ import {
 import { NavLink, useParams } from "react-router-dom";
 import { removeproduct } from "../../helper/product";
 import { isAuthenticate } from "../../../helper/auth";
+import { BiSearch } from "react-icons/bi";
 
 const ManageProduct = () => {
   const tableHeadingColor = useColorModeValue("green.600", "green.400");
   const linkColor = useColorModeValue("blue.500", "blue.300");
   const [removeLoading, setRemoveLoading] = useState(false);
+  const [filterVal, setFilterVal] = useState([]);
 
   const dispatch = useDispatch();
   const toast = useToast();
   const { adminId } = useParams();
   const token = isAuthenticate();
   const { products, rerender } = useSelector((state) => state.PRODUCT);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState({
+    minPrice: "",
+    maxPrice: "",
+  });
+  const { minPrice, maxPrice } = filter;
   useEffect(() => {
-    getallproducts().then((response) => {
+    getallproducts({ search, minPrice, maxPrice }).then((response) => {
       if (!response.data) {
         return toast({
           position: "top-right",
@@ -51,6 +61,7 @@ const ManageProduct = () => {
         });
       } else {
         dispatch(getAllProdcuts(response?.data?.products));
+        setFilterVal(response?.data?.products);
       }
     });
   }, [rerender]);
@@ -81,13 +92,30 @@ const ManageProduct = () => {
     });
   };
 
+  let filterProduct = filterVal.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Sidebar>
       <VStack my={10}>
         <Badge variant="subtle" colorScheme="green">
           ADMIN
         </Badge>
-        <Heading>Manage Product</Heading>
+        <Heading mb="1">Manage Product</Heading>
+        <InputGroup w={"70%"}>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<BiSearch color="gray.300" />}
+          />
+          <Input
+            type="search"
+            placeholder="Enter product name..."
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+        </InputGroup>
       </VStack>
       <TableContainer bgColor={useColorModeValue("white", "gray.900")}>
         <Table variant="simple">
@@ -111,7 +139,7 @@ const ManageProduct = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {products.map((product, index) => (
+            {filterProduct.map((product, index) => (
               <Tr key={product?._id}>
                 <Td># {index}</Td>
                 <Td>

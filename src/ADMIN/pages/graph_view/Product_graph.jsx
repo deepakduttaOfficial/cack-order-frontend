@@ -28,8 +28,19 @@ ChartJS.register(
 
 const Product_graph = () => {
   const [createdMonth, setCreatedMonth] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [filter, setFilter] = useState({
+    search: "",
+    minPrice: "",
+    maxPrice: "",
+  });
+  const { search, minPrice, maxPrice } = filter;
+
   useEffect(() => {
-    getallproducts().then((response) => {
+    setLoading(true);
+    getallproducts({ search, minPrice, maxPrice }).then((response) => {
+      setLoading(false);
       if (!response.data) {
         setCreatedMonth([]);
       } else {
