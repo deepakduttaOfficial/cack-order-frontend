@@ -12,19 +12,19 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import CustomButton from "../../components/CustomButton";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { toast } from "react-toastify";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { resetpassword } from "./helper";
 
 const RecoveryPassword = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
+  const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [values, setValues] = useState({
@@ -35,6 +35,8 @@ const RecoveryPassword = () => {
     success: false,
   });
   const { password, confirmPassword, loading } = values;
+
+  let disabled = loading || password.length < 4 || password !== confirmPassword;
 
   const handleChange = (name) => (e) => {
     setValues({
@@ -49,14 +51,7 @@ const RecoveryPassword = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setValues({ ...values, error: false, loading: true, success: false });
-    if (password !== confirmPassword) {
-      setValues({ ...values, error: false, loading: false, success: false });
-      return toast("password and confirm password not match", {
-        type: "error",
-        theme: "colored",
-        autoClose: 2000,
-      });
-    }
+
     const data = {
       password,
       id: searchParams.get("id"),
@@ -66,18 +61,23 @@ const RecoveryPassword = () => {
       console.log(response);
       if (!response.data) {
         setValues({ ...values, error: true, loading: false, success: false });
-        return toast(response.error.message || "Something went wrong", {
-          type: "error",
-          theme: "colored",
-          autoClose: 5000,
+        return toast({
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
         });
       } else {
         setValues({ ...values, error: false, loading: false, success: true });
-        toast(response.data.message, {
-          type: "success",
-          theme: "colored",
-          autoClose: 5000,
+        toast({
+          title: response.data.message,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top-right",
         });
+
         navigate("/e/signin");
       }
     });
@@ -170,6 +170,7 @@ const RecoveryPassword = () => {
               spinnerPlacement="end"
               loadingText="Submiting"
               type="submit"
+              disabled={disabled}
             >
               Reset password
             </CustomButton>

@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -19,6 +18,7 @@ import {
   InputLeftElement,
   Input,
   Badge,
+  useToast,
 } from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -34,6 +34,7 @@ import { searchBar } from "../../reducer/product/action";
 
 const Topbar = ({ isOpen, onOpen, onClose }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const toast = useToast();
   const navigate = useNavigate();
   const user = getLocalUser();
   const { sidebarIcon } = useSelector((state) => state.UI);
@@ -136,10 +137,12 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
                     <MenuItem
                       onClick={() => {
                         signout(() => {
-                          toast("Log out successfully", {
-                            type: "warning",
-                            theme: "colored",
-                            autoClose: 5000,
+                          toast({
+                            title: "Log out",
+                            status: "warning",
+                            duration: 9000,
+                            isClosable: true,
+                            position: "top-right",
                           });
                           navigate("/e/signin");
                         });
