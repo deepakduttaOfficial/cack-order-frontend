@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { isAuthenticate } from "../../helper/auth";
 import {
   Flex,
@@ -18,11 +17,14 @@ import {
   InputRightElement,
   Text,
   FormHelperText,
+  useToast,
+  position,
 } from "@chakra-ui/react";
 import CustomButton from "../../components/CustomButton";
 import { signup } from "./helper";
 
 const Signup = () => {
+  const toast = useToast();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [values, setValues] = useState({
@@ -53,18 +55,23 @@ const Signup = () => {
     signup({ name, email, password }).then((response) => {
       if (!response.data) {
         setValues({ ...values, loading: false, error: true, success: false });
-        return toast(response.error.message || "Something went wrong", {
-          type: "error",
-          theme: "colored",
-          autoClose: 2000,
+        return toast({
+          title: response.error.message || "Something went wrong",
+          status: "error",
+          position: "top-right",
+          duration: 9000,
+          isClosable: true,
         });
       } else {
         setValues({ ...values, loading: false, error: false, success: true });
-        toast("Confirm your email to countinue", {
-          type: "success",
-          theme: "colored",
-          autoClose: 5000,
+        toast({
+          title: "Please confirm your email to continue",
+          status: "success",
+          position: "top-right",
+          duration: 9000,
+          isClosable: true,
         });
+
         navigate("/e/signin");
       }
     });

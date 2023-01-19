@@ -16,7 +16,8 @@ import CustomButton from "../../components/CustomButton";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { forgotpassword } from "./helper";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import { isAuthenticate } from "../../helper/auth";
 
 const ForgotPassword = () => {
   const [values, setValues] = useState({
@@ -48,6 +49,10 @@ const ForgotPassword = () => {
       }
     });
   };
+
+  const disabled =
+    loading || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+
   return (
     <Flex
       minH={"100vh"}
@@ -56,6 +61,7 @@ const ForgotPassword = () => {
       bg={useColorModeValue("gray.50", "gray.800")}
       flexDir="column"
     >
+      {isAuthenticate() && <Navigate to={"/"} replace />}
       <HStack>
         <Image w={"30px"} src={logo} />
         <Heading>Misti</Heading>
@@ -112,6 +118,7 @@ const ForgotPassword = () => {
               spinnerPlacement="end"
               loadingText="Submiting"
               type="submit"
+              disabled={disabled}
             >
               Request Reset
             </CustomButton>

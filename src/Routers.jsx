@@ -21,6 +21,7 @@ import ProtectedRoute from "./helper/ProtectedRoute";
 import Order from "./pages/USER_INFO/pages/order";
 import PasswordUpdate from "./pages/USER_INFO/pages/PasswordUpdate";
 import CreateOrder from "./pages/order";
+import VerifyAccount from "./pages/varify";
 
 const Routers = () => {
   tokenAuth();
@@ -34,6 +35,7 @@ const Routers = () => {
       <Route path="/account/reset-password" element={<RecoveryPassword />} />
       <Route path="/product/:productId" element={<ProductDetails />} />
       <Route path="/addcard" element={<Addcardproducts />} />
+      <Route path="/user/e/verify-email" element={<VerifyAccount />} />
       {/* Product routes */}
       <Route
         path="/admin/:adminId/dashboard/createproduct"

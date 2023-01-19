@@ -18,8 +18,9 @@ import CustomButton from "../../components/CustomButton";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import { resetpassword } from "./helper";
+import { isAuthenticate } from "../../helper/auth";
 
 const RecoveryPassword = () => {
   const navigate = useNavigate();
@@ -90,6 +91,7 @@ const RecoveryPassword = () => {
       bg={useColorModeValue("gray.50", "gray.800")}
       flexDir="column"
     >
+      {isAuthenticate() && <Navigate to={"/"} replace />}
       <HStack>
         <Image w={"30px"} src={logo} />
         <Heading>Misti</Heading>
