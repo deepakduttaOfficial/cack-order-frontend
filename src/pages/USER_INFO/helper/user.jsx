@@ -32,3 +32,18 @@ export const updatepassword = (userId, token, data) => {
       return { error: error.response.data };
     });
 };
+
+export const resendvarification = (userId, token) => {
+  return axios(`${api}/user/resend/verificationmail/${userId}`, {
+    method: "post",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      return { data: response.data };
+    })
+    .catch((error) => {
+      return { error: error.response.data };
+    });
+};

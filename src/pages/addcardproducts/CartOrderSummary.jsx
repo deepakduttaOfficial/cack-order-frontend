@@ -50,6 +50,8 @@ const CartOrderSummary = ({ products }) => {
     dispatch(addItems(payload));
     navigate(`/order/create-order/${user._id}`);
   };
+  let disabled =
+    !isAuthenticate() || products?.length === 0 || !user.isVerified;
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
@@ -77,7 +79,7 @@ const CartOrderSummary = ({ products }) => {
         fontSize="md"
         rightIcon={<FaArrowRight />}
         onClick={addItemsCard}
-        disabled={!isAuthenticate() || products?.length === 0}
+        disabled={disabled}
       >
         Checkout
       </Button>
