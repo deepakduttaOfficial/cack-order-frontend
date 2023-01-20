@@ -59,13 +59,12 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <Box as={NavLink} to="/" mr={["0px", "2"]}>
             <HStack>
-              <Image
-                src={logo}
-                alt="logo"
-                w={"9"}
-                display={["none", "block"]}
-              />
-              <Text fontWeight={"bold"}>Misti</Text>
+              <Box w={9}>
+                <Image src={logo} alt="logo" w={"full"} />
+              </Box>
+              <Text fontWeight={"bold"} display={{ base: "none", md: "block" }}>
+                Misti
+              </Text>
             </HStack>
           </Box>
 
