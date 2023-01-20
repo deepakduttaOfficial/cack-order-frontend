@@ -17,8 +17,6 @@ const Home = () => {
   );
   const [searchParams, _] = useSearchParams();
   const search = searchParams.get("q");
-
-  console.log();
   useEffect(() => {
     setLoading(true);
     getallproducts(search, minPrice, maxPrice).then((response) => {
@@ -36,7 +34,7 @@ const Home = () => {
       }
     });
   }, [rerender, search, minPrice, maxPrice]);
-
+  console.log(products);
   return (
     <Base>
       {loading && (

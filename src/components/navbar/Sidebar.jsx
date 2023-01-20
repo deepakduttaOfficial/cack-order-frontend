@@ -13,23 +13,11 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { filterProduct } from "../../reducer/product/action";
-import { useState } from "react";
-import { useEffect } from "react";
-import { getcategory } from "../../helper/category";
+
 import { CloseIcon } from "@chakra-ui/icons";
 
 const Sidebar = ({ onClose, ...rest }) => {
   const dispatch = useDispatch();
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    getcategory().then((response) => {
-      if (!response.data) {
-        setCategories([]);
-      } else {
-        setCategories(response.data?.categories);
-      }
-    });
-  }, []);
 
   return (
     <Box
@@ -85,13 +73,7 @@ const Sidebar = ({ onClose, ...rest }) => {
 
         <Box>
           <FormLabel>Select Category</FormLabel>
-          <Select defaultValue="" disabled>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </Select>
+          <Select placeholder="category" disabled></Select>
         </Box>
 
         <FormControl>
