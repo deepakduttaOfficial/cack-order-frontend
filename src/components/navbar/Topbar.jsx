@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Box,
   Flex,
@@ -132,9 +132,7 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
                         <MenuItem
                           color={useColorModeValue("green.600", "green.200")}
                           as={NavLink}
-                          to={`/admin/${
-                            getLocalUser()?._id
-                          }/dashboard/createproduct`}
+                          to={`/admin/${user?._id}/dashboard/createproduct`}
                         >
                           ADMIN DASHBOARD
                           <MenuDivider />
@@ -142,10 +140,7 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
                       </>
                     )}
 
-                    <MenuItem
-                      as={NavLink}
-                      to={`/profile/${getLocalUser()?._id}`}
-                    >
+                    <MenuItem as={NavLink} to={`/profile/${user?._id}`}>
                       PROFILE
                     </MenuItem>
                     <MenuDivider />

@@ -9,13 +9,13 @@ export const authenticate = (data) => {
 
 export const setLocalUser = (user) => {
   if (typeof window !== "undefined") {
-    sessionStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("user", JSON.stringify(user));
   }
 };
 
 export const getLocalUser = () => {
-  if (typeof window !== "undefined") {
-    return JSON.parse(sessionStorage.getItem("user"));
+  if (localStorage.getItem("user")) {
+    return JSON.parse(localStorage.getItem("user"));
   }
 };
 
@@ -37,7 +37,7 @@ export const isAuthenticate = () => {
 export const signout = (next) => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("sign_in");
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
     next();
   }
 };

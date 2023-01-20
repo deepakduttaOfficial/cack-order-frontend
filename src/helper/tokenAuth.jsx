@@ -1,6 +1,6 @@
+import { useToast } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import {
   getuserfromtoken,
   isAuthenticate,
@@ -10,15 +10,18 @@ import {
 
 export default () => {
   const navigate = useNavigate();
+  const toast = useToast();
   return useEffect(() => {
     if (isAuthenticate()) {
       const token = isAuthenticate();
       getuserfromtoken(token).then((response) => {
         if (response.error) {
-          toast("Token has been expired", {
-            type: "error",
-            theme: "colored",
-            autoClose: 2000,
+          toast({
+            title: "Token has been expired",
+            position: "top-right",
+            duration: 9000,
+            status: "error",
+            isClosable: true,
           });
           signout(() => {
             navigate("/e/signin");

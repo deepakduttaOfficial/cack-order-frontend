@@ -34,7 +34,7 @@ const Home = () => {
       }
     });
   }, [rerender, search, minPrice, maxPrice]);
-  console.log(products);
+
   return (
     <Base>
       {loading && (
