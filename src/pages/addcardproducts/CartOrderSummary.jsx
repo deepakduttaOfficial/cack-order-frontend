@@ -51,7 +51,7 @@ const CartOrderSummary = ({ products }) => {
     navigate(`/order/create-order/${user._id}`);
   };
   let disabled =
-    !isAuthenticate() || products?.length === 0 || !user.isVerified;
+    !isAuthenticate() || products?.length === 0 || !user?.isVerified;
 
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">

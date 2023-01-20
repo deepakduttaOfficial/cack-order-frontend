@@ -15,7 +15,7 @@ const CarouselImagesCard = () => {
   });
 
   return (
-    <Box px={{ base: "0", md: "5" }} w={{ base: "full", md: "lg" }}>
+    <Box px={{ base: "0", md: "5" }} w={{ base: "full", md: "md" }}>
       <Button mt="5" onClick={() => navigate(-1)}>
         <BiArrowBack />
       </Button>

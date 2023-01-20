@@ -30,7 +30,7 @@ const Order = () => {
         </Heading>
       </VStack>
       {orders?.length === 0 ? (
-        <Image src={no_order_found} w={"96"} />
+        <Image src={no_order_found} w={"96"} mx="auto" />
       ) : (
         <UserOrders orders={orders} />
       )}

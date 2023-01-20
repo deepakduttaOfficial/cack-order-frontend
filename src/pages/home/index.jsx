@@ -1,7 +1,8 @@
-import { Grid, HStack, Progress, Skeleton, useToast } from "@chakra-ui/react";
+import { Grid, Skeleton, useToast } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 import Base from "../../components/navbar";
 import ProductCard from "../../components/ProductCard";
 import { getAllProdcuts } from "../../reducer/product/action";
@@ -11,12 +12,16 @@ const Home = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
-  const { products, rerender, search, minPrice, maxPrice } = useSelector(
+  const { products, rerender, minPrice, maxPrice } = useSelector(
     (state) => state.PRODUCT
   );
+  const [searchParams, _] = useSearchParams();
+  const search = searchParams.get("q");
+
+  console.log();
   useEffect(() => {
     setLoading(true);
-    getallproducts({ search, minPrice, maxPrice }).then((response) => {
+    getallproducts(search, minPrice, maxPrice).then((response) => {
       setLoading(false);
       if (!response.data) {
         return toast({

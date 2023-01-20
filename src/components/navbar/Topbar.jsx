@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -38,7 +38,10 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
   const navigate = useNavigate();
   const user = getLocalUser();
   const { sidebarIcon } = useSelector((state) => state.UI);
-  const dispatch = useDispatch();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get("q");
+
   return (
     <>
       <Box
@@ -61,8 +64,9 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
             <Input
               type="search"
               placeholder="whitch cack do you want..."
+              value={search || ""}
               onChange={(e) => {
-                dispatch(searchBar(e.target.value));
+                setSearchParams(`q=${e.target.value}`);
               }}
             />
           </InputGroup>
