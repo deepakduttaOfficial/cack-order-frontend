@@ -41,7 +41,7 @@ const VerifyAccount = () => {
             setLocalUser(response.data?.user);
             navigate("/");
             window.location.reload();
-          }, 5000);
+          }, 2000);
         });
       }
     });
@@ -60,6 +60,7 @@ const VerifyAccount = () => {
           {success && (
             <>
               Congratulations, your account has been successfully verified.{" "}
+              <br />
               Redirecing...
             </>
           )}

@@ -19,6 +19,9 @@ import {
   Input,
   Badge,
   useToast,
+  HStack,
+  Text,
+  Image,
 } from "@chakra-ui/react";
 
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -30,7 +33,7 @@ import { getLocalUser, isAuthenticate, signout } from "../../helper/auth";
 
 import { FiShoppingCart } from "react-icons/fi";
 import { getaddcard } from "../../helper/addCard";
-import { searchBar } from "../../reducer/product/action";
+import logo from "../../assets/logo.png";
 
 const Topbar = ({ isOpen, onOpen, onClose }) => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -54,7 +57,17 @@ const Topbar = ({ isOpen, onOpen, onClose }) => {
         zIndex={"overlay"}
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <Box>Logo</Box>
+          <Box as={NavLink} to="/" mr={["0px", "2"]}>
+            <HStack>
+              <Image
+                src={logo}
+                alt="logo"
+                w={"9"}
+                display={["none", "block"]}
+              />
+              <Text fontWeight={"bold"}>Misti</Text>
+            </HStack>
+          </Box>
 
           <InputGroup w={"70%"} mx="1">
             <InputLeftElement

@@ -85,7 +85,7 @@ const Sidebar = ({ onClose, ...rest }) => {
 
         <Box>
           <FormLabel>Select Category</FormLabel>
-          <Select defaultValue="">
+          <Select defaultValue="" disabled>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>
                 {category.name}
