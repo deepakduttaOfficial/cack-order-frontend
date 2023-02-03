@@ -1,4 +1,7 @@
-# Online Cake Ordering Website
+# Online Cake Ordering Website (Frontend)
+
+- Deploy link - [Online Cake Order](https://online-cake-order.netlify.app/)
+- Backend Source Code - [Code](https://github.com/deepakduttaOfficial/cake-order-backend)
 
 ## About this project
 
