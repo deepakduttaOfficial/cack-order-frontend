@@ -21,7 +21,7 @@ const Home = () => {
     setLoading(true);
     getallproducts(search, minPrice, maxPrice).then((response) => {
       setLoading(false);
-      if (!response.data) {
+      if (!response?.data) {
         return toast({
           title: response.error.message || "Something went wrong",
           status: "error",
@@ -47,7 +47,17 @@ const Home = () => {
         </Grid>
       )}
 
-      <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>
+      <Grid
+        // templateColumns="repeat(4, minmax(200px, 1fr))"
+        templateColumns={{
+          base: "repeat(1, minmax(200px, 1fr))",
+          sm: "repeat(2, minmax(200px, 1fr))",
+          md: "repeat(2, minmax(200px, 1fr))",
+          lg: "repeat(3,  minmax(200px, 1fr))",
+          xl: "repeat(4,  minmax(200px, 1fr))",
+        }}
+        gap={6}
+      >
         {products.map((product, index) => {
           return <ProductCard key={index} product={product} />;
         })}
